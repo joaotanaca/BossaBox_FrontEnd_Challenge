@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { ContainerSearchBar, InputSearchBar, IconSearch } from './styles';
+import CheckboxSearchBar from '../CheckboxSearchBar';
 
 function SearchBar() {
   return (
@@ -8,6 +9,7 @@ function SearchBar() {
       <ContainerSearchBar>
         <IconSearch />
         <InputSearchBar />
+        <CheckboxSearchBar label={"search in tags only"} />
       </ContainerSearchBar>
     </>
   );

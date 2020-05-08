@@ -9,6 +9,14 @@ export const ContainerSearchBar = styled.div`
   position: relative;
 `;
 
+export const IconSearch = styled(FiSearch)`
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+  color: #b1adb9;
+`;
+
 export const InputSearchBar = styled.input.attrs({
   type: 'text',
   placeholder: 'Digite o que está procurando...',
@@ -23,12 +31,4 @@ export const InputSearchBar = styled.input.attrs({
   ::placeholder {
     color: #b1adb9;
   }
-`;
-
-export const IconSearch = styled(FiSearch)`
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translate(0, -50%);
-  color:#b1adb9;
 `;

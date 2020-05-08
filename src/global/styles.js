@@ -19,5 +19,6 @@ html, body, #root {
 
 body {
 	background: #000;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 `;

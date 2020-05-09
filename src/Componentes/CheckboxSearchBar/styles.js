@@ -5,8 +5,6 @@ export const ContainerCheckbox = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 0 10px;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const CheckContainer = styled.div`

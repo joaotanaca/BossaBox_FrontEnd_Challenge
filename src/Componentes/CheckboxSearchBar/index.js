@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   ContainerCheckbox,
@@ -7,18 +7,13 @@ import {
   CheckIcon,
 } from './styles';
 
-function CheckboxSearchBar({ label }) {
-  const [check, setCheck] = useState(false);
+function CheckboxSearchBar({ label, tagsOnly }) {
 
   return (
     <ContainerCheckbox>
-      <CheckContainer
-        onClick={() => {
-          setCheck(!check);
-        }}
-      >
-        <CheckInput checked={check} />
-        <CheckIcon checked={check} />
+      <CheckContainer>
+        <CheckInput checked={tagsOnly} />
+        <CheckIcon checked={tagsOnly} />
       </CheckContainer>
       {label}
     </ContainerCheckbox>

@@ -20,9 +20,12 @@ function AddModal({ addTool }) {
   const [err, setErr] = useState([]);
   const [tags, setTags] = useState([]);
   const refTagsInput = createRef();
+  const refNameInput = createRef();
+  const refLinkInput = createRef();
+  const refDescriptionInput = createRef();
 
   function handleKeyPress({ key, target: { value } }) {
-    if (key === 'Enter') {
+    if (key === 'Enter' && value !== '') {
       setTags([...tags, value.toLowerCase()]);
       refTagsInput.current.value = '';
     }
@@ -58,7 +61,12 @@ function AddModal({ addTool }) {
       description: description,
       tags: tags,
     });
-    console.log(response);
+    refNameInput.current.value = '';
+    refLinkInput.current.value = '';
+    refDescriptionInput.current.value = '';
+    refTagsInput.current.value = '';
+    setTags([]);
+    return response;
   }
   return (
     <ContainerAddModal>
@@ -73,6 +81,7 @@ function AddModal({ addTool }) {
             setName(e.target.value);
           }}
           className={err.name ? 'error' : ''}
+          ref={refNameInput}
         />
       </LabelAddInputs>
       <LabelAddInputs>
@@ -83,6 +92,7 @@ function AddModal({ addTool }) {
             setLink(e.target.value);
           }}
           className={err.link ? 'error' : ''}
+          ref={refLinkInput}
         />
       </LabelAddInputs>
       <LabelAddInputs>
@@ -93,6 +103,7 @@ function AddModal({ addTool }) {
             setDescription(e.target.value);
           }}
           className={err.description ? 'error' : ''}
+          ref={refDescriptionInput}
         />
       </LabelAddInputs>
       <InputTags

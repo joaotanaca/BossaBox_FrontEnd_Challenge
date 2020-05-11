@@ -21,6 +21,7 @@ import {
 } from './styles';
 import CheckboxSearchBar from '../CheckboxSearchBar';
 import RemoveModal from './RemoveModal';
+import AddModal from './AddModal';
 
 function SearchBar() {
   const [tools, setTools] = useState([]);
@@ -28,7 +29,7 @@ function SearchBar() {
   const [tagsOnly, setTagsOnly] = useState(false);
   const [showRemove, setShowRemove] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
-  const [remove, setRemove] = useState(true);
+  const [httpResponse, setHttpResponse] = useState();
   const [removeId, setRemoveId] = useState('');
   const [removeName, setRemoveName] = useState('');
 
@@ -42,8 +43,14 @@ function SearchBar() {
 
   async function removeTool() {
     const response = await api.delete(`tools/${removeId}`);
-    setRemove(response);
+    setHttpResponse(response);
     showVerification('remove');
+  }
+
+  async function addTool() {
+    const response = await api.post(`tools`, {});
+    setHttpResponse(response);
+    showVerification('add');
   }
 
   useEffect(() => {
@@ -58,7 +65,7 @@ function SearchBar() {
       setTools(data);
     }
     fetchData();
-  }, [query, tagsOnly, remove]);
+  }, [query, tagsOnly, httpResponse]);
 
   return (
     <>
@@ -71,7 +78,11 @@ function SearchBar() {
             tagsOnly={tagsOnly}
           />
         </ContainerCheckboxSearch>
-        <ButtonAddSearchBar>
+        <ButtonAddSearchBar
+          onClick={() => {
+            setShowAdd(!showAdd);
+          }}
+        >
           <IconButtonAdd /> Add
         </ButtonAddSearchBar>
       </ContainerSearchBar>
@@ -104,6 +115,14 @@ function SearchBar() {
           }}
         />
         <RemoveModal removeName={removeName} removeTool={removeTool} />
+      </Modal>
+      <Modal show={showAdd}>
+        <CloseIconModal
+          onClick={() => {
+            showVerification('add');
+          }}
+        />
+        <AddModal />
       </Modal>
     </>
   );

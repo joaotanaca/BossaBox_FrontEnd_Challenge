@@ -15,7 +15,7 @@ export const ContainerModal = styled.div`
 export const ModalCard = styled.div`
   background: #ffffff;
   border-radius: 5px;
-  max-width: 600px;
+  max-width: 550px;
   width: calc(100% - 20px);
   min-height: 150px;
   padding: 20px;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../api'
+import api from '../../api';
 import Modal from '../Modal';
 
 import {
@@ -17,13 +17,10 @@ import {
   TagTool,
   RemoveTool,
   RemoveIconTool,
-  ModalTitle,
-  ModalDescription,
-  ModalConfirmRemove,
   CloseIconModal,
-  ModalConfirmRemoveContainer,
 } from './styles';
 import CheckboxSearchBar from '../CheckboxSearchBar';
+import RemoveModal from './RemoveModal';
 
 function SearchBar() {
   const [tools, setTools] = useState([]);
@@ -36,19 +33,16 @@ function SearchBar() {
   const [removeName, setRemoveName] = useState('');
 
   function showVerification(show) {
-    if(show==='remove'){
+    if (show === 'remove') {
       setShowRemove(!showRemove);
-
-    }else{
-      setShowAdd(!showAdd)
+    } else {
+      setShowAdd(!showAdd);
     }
   }
 
   async function removeTool() {
-    const response = await api.delete(
-      `tools/${removeId}`
-    );
-    setRemove(response)
+    const response = await api.delete(`tools/${removeId}`);
+    setRemove(response);
     showVerification('remove');
   }
 
@@ -104,14 +98,12 @@ function SearchBar() {
         ))}
       </ContainerTools>
       <Modal show={showRemove}>
-        <CloseIconModal onClick={()=>{showVerification('remove')}} />
-        <ModalTitle>Remove tool</ModalTitle>
-        <ModalDescription>
-          Are you sure you want to remove {removeName}?
-        </ModalDescription>
-        <ModalConfirmRemoveContainer>
-          <ModalConfirmRemove onClick={removeTool}>Confirm</ModalConfirmRemove>
-        </ModalConfirmRemoveContainer>
+        <CloseIconModal
+          onClick={() => {
+            showVerification('remove');
+          }}
+        />
+        <RemoveModal removeName={removeName} removeTool={removeTool} />
       </Modal>
     </>
   );

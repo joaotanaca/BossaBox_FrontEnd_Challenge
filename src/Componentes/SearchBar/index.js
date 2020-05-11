@@ -47,10 +47,11 @@ function SearchBar() {
     showVerification('remove');
   }
 
-  async function addTool() {
-    const response = await api.post(`tools`, {});
+  async function addTool(body) {
+    const response = await api.post(`tools`, body);
     setHttpResponse(response);
     showVerification('add');
+    return response;
   }
 
   useEffect(() => {
@@ -122,7 +123,7 @@ function SearchBar() {
             showVerification('add');
           }}
         />
-        <AddModal />
+        <AddModal addTool={addTool} />
       </Modal>
     </>
   );

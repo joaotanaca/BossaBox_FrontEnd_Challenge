@@ -57,11 +57,8 @@ function SearchBar() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await api.get(
-        tagsOnly
-          ? `tools?tags_like=${query}`
-          : query
-          ? `tools?q=${query}`
-          : 'tools'
+        // eslint-disable-next-line no-nested-ternary
+        tagsOnly ? `tools?tags=${query}` : query ? `tools?q=${query}` : 'tools'
       );
       setTools(data);
     }
@@ -74,17 +71,15 @@ function SearchBar() {
         <IconInputSearch />
         <InputSearchBar onChange={e => setQuery(e.target.value)} />
         <ContainerCheckboxSearch onClick={() => setTagsOnly(!tagsOnly)}>
-          <CheckboxSearchBar
-            label={'search in tags only'}
-            tagsOnly={tagsOnly}
-          />
+          <CheckboxSearchBar label="search in tags only" tagsOnly={tagsOnly} />
         </ContainerCheckboxSearch>
         <ButtonAddSearchBar
           onClick={() => {
             setShowAdd(!showAdd);
           }}
         >
-          <IconButtonAdd /> Add
+          <IconButtonAdd />
+          Add
         </ButtonAddSearchBar>
       </ContainerSearchBar>
       <ContainerTools>
@@ -98,11 +93,13 @@ function SearchBar() {
                 setRemoveId(tool.id);
               }}
             >
-              <RemoveIconTool /> remove
+              <RemoveIconTool />
+              remove
             </RemoveTool>
             <DescriptionTool>{tool.description}</DescriptionTool>
             <TagsToolContainer>
               {tool.tags.map((tag, index) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <TagTool key={index}>#{tag}</TagTool>
               ))}
             </TagsToolContainer>
